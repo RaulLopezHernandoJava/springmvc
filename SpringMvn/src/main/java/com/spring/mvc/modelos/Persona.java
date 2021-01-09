@@ -7,46 +7,49 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="persona")
+@Table(name = "persona")
 
 public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPersona;
+	@NotEmpty
 	private String nombre;
+	@NotEmpty
 	private String apellido;
+	@NotEmpty
+	@Email
 	private String email;
+	@NotEmpty
 	private String telefono;
-	
-	public Persona() {};
-	
-	
+
+	public Persona() {
+	};
+
 	public Persona(String nombre, String apellido, String email, String telefono) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.telefono = telefono;
 	}
-	
-	
 
 	public Long getIdPersona() {
 		return idPersona;
 	}
 
-
 	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
-
 
 	public String getNombre() {
 		return nombre;
