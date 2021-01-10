@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -26,10 +28,13 @@ public class ControladorInicio {
 	@Autowired
 	private PersonaService personaService;
 
+	// Con "@AuthenticationPrincipal User user" guardamos en la variable user el usuario que hizo login
+	
 	@GetMapping("/")
-	public String inicio(Model model) {
+	public String inicio(Model model,@AuthenticationPrincipal User user) {
 
 		ArrayList<Persona> personas = (ArrayList<Persona>) personaService.listarPersonas();
+		System.out.println("Este es el usuario que hizo login   " + user);
 
 		model.addAttribute("personas", personas);
 
