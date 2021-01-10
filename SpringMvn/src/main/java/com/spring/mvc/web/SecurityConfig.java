@@ -11,12 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// Configuracion y creacion de usuarios en memoria
 	// AUTENTICACION
+	// El password normalmente ira encriptado pero si no lo queremos encriptado
+	// ponemos "{noop}"
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		try {
 			auth.inMemoryAuthentication()
-					// El password normalmente ira encriptado pero si no lo queremos encriptado
-					// ponemos "{noop}"
+
 					.withUser("admin").password("{noop}123").roles("ADMIN", "USER").and().withUser("user")
 					.password("{noop}123").roles("USER");
 		} catch (Exception e) {
